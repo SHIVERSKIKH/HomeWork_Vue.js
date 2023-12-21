@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>HomeWork2</title>
+</head>
+<body>
+    <!-- Вы разрабатываете приложение для отображения и сортировки списка товаров. У вас есть массив объектов products, 
+        где каждый объект представляет товар с его названием и ценой. Вам необходимо отобразить список товаров и предоставить пользователю возможность сортировать товары по цене (по возрастанию и по убыванию). -->
+
+    <div id="app">
+        <h2>Десткие игрушки</h2>
+        <article v-for="item in products" :key="item.id" class="product">
+            <h3 class="product__title">Название: {{ item.name }}</h3>
+            <p class="product__price">Цена: {{ item.price }} $</p>
+            <img :width="item.width" :src="item.url" alt="images"><br>
+            <button class="btn__increase" @click="sortPriceIncrease()">Сортировать товар по возрастанию цены</button><br>
+            <button class="btn__decreasing" @click="sortPriceDescending">Сортировать товар по убыванию цены</button>
+        </article>
+    </div>
+
+<script>
+
+      const App = {
+        data: () => ({
+          products: [
+            {
+            name: "Bear",
+            price: "150",
+            url: "https://cdn1.ozonusercontent.com/s3/marketing-api/banners/ew/Vh/c200/ewVhPFNmaWbQFQEZRhFAylf4Uh1hxPhP.jpg",
+            width:300,
+          },
+            {
+            name: "Dog",
+            price: "50",
+            url: "https://chadorado.ru/thumb/2/V-9Gf8fB8xSRQvu4xxBcXA/320r500/d/20042-632-300x300x90.jpg",
+            width:300,
+          },
+            {
+            name: "Cat",
+            price: "250",
+            url: "https://sun9-3.userapi.com/qNgrqLNZd-xrAoUoNijRAaGIRGFHHGBb4ODvog/zsRLs2Vy_Ss.jpg",
+            width:300,
+          },
+            {
+            name: "Rabbit",
+            price: "80",
+            url: "https://images.zakupka.com/i3/firms/27/10996/10996492/igrushka-krolik-mamas-and-papas-bunny-rozovaya-ah0031-2_a86e9c8d50c9b4c_300x300.webp.jpg",
+            width:300,
+          },
+        ],
+        }),
+        methods: {
+          sortPriceIncrease() {
+            this.products.sort((a, b) => a.price - b.price);
+          },
+          sortPriceDescending() {
+            this.products.sort((a, b) => b.price - a.price);
+          }
+        },
+        computed: {
+          sortProducts() {
+            return this.products.slice();
+          }
+        }
+      };
+      Vue.createApp(App).mount("#app");
+</script>
+</body>
+</html>
